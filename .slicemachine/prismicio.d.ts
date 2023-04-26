@@ -57,7 +57,7 @@ interface ArticleDocumentData {
  * Slice for *Article → Slice Zone*
  *
  */
-type ArticleDocumentDataSlicesSlice = ImageSlice | QuoteSlice | TextSlice | ContactFormSlice;
+type ArticleDocumentDataSlicesSlice = ImageSlice | QuoteSlice | TextSlice | ContactFormSlice | EmbedSliceSlice;
 /**
  * Article document from Prismic
  *
@@ -262,6 +262,45 @@ type ContactFormSliceVariation = ContactFormSliceDefault;
  */
 export type ContactFormSlice = prismicT.SharedSlice<"contact_form", ContactFormSliceVariation>;
 /**
+ * Primary content in EmbedSlice → Primary
+ *
+ */
+interface EmbedSliceSliceDefaultPrimary {
+    /**
+     * Embed field in *EmbedSlice → Primary*
+     *
+     * - **Field Type**: Embed
+     * - **Placeholder**: *None*
+     * - **API ID Path**: embed_slice.primary.embed
+     * - **Documentation**: https://prismic.io/docs/core-concepts/embed
+     *
+     */
+    embed: prismicT.EmbedField;
+}
+/**
+ * Default variation for EmbedSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: `EmbedSlice`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type EmbedSliceSliceDefault = prismicT.SharedSliceVariation<"default", Simplify<EmbedSliceSliceDefaultPrimary>, never>;
+/**
+ * Slice variation for *EmbedSlice*
+ *
+ */
+type EmbedSliceSliceVariation = EmbedSliceSliceDefault;
+/**
+ * EmbedSlice Shared Slice
+ *
+ * - **API ID**: `embed_slice`
+ * - **Description**: `EmbedSlice`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
+ *
+ */
+export type EmbedSliceSlice = prismicT.SharedSlice<"embed_slice", EmbedSliceSliceVariation>;
+/**
  * Primary content in Image → Primary
  *
  */
@@ -438,6 +477,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { ArticleDocumentData, ArticleDocumentDataSlicesSlice, ArticleDocument, NavigationDocumentData, NavigationDocumentDataLinksItem, NavigationDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, SettingsDocumentData, SettingsDocument, AllDocumentTypes, ContactFormSliceDefault, ContactFormSliceVariation, ContactFormSlice, ImageSliceDefaultPrimary, ImageSliceDefault, ImageSliceWidePrimary, ImageSliceWide, ImageSliceVariation, ImageSlice, QuoteSliceDefaultPrimary, QuoteSliceDefault, QuoteSliceVariation, QuoteSlice, TextSliceDefaultPrimary, TextSliceDefault, TextSliceVariation, TextSlice };
+        export type { ArticleDocumentData, ArticleDocumentDataSlicesSlice, ArticleDocument, NavigationDocumentData, NavigationDocumentDataLinksItem, NavigationDocument, PageDocumentData, PageDocumentDataSlicesSlice, PageDocument, SettingsDocumentData, SettingsDocument, AllDocumentTypes, ContactFormSliceDefault, ContactFormSliceVariation, ContactFormSlice, EmbedSliceSliceDefaultPrimary, EmbedSliceSliceDefault, EmbedSliceSliceVariation, EmbedSliceSlice, ImageSliceDefaultPrimary, ImageSliceDefault, ImageSliceWidePrimary, ImageSliceWide, ImageSliceVariation, ImageSlice, QuoteSliceDefaultPrimary, QuoteSliceDefault, QuoteSliceVariation, QuoteSlice, TextSliceDefaultPrimary, TextSliceDefault, TextSliceVariation, TextSlice };
     }
 }
